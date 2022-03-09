@@ -1,0 +1,26 @@
+
+  SELECT DISTINCT C.NAME AS Customers, M.NAME AS SalesManagers
+  FROM ORDERS O 
+  LEFT JOIN CUSTOMERS C ON C.ID=O.CUSTOMER_ID
+  LEFT JOIN MANAGER M ON M.ID=C.MANAGER_ID
+  WHERE O.[DATE] BETWEEN '20130101' AND '20220306'
+  GROUP BY O.[CUSTOMER_ID], C.NAME, M.NAME
+  HAVING SUM(O.[AMOUNT])>10000
+
+--1
+SELECT emp_name
+FROM Table_task
+WHERE CHARINDEX('m', emp_name) > 0
+
+--2
+SELECT dept_id, MAX(salary)
+FROM Table_task
+GROUP BY dept_id
+
+--3
+SELECT emp_name
+FROM Table_task INNER JOIN ( SELECT salary FROM Table_task
+GROUP BY salary
+HAVING COUNT(*)>1) A ON A.salary=Table_task.salary
+
+
